@@ -1,0 +1,19 @@
+<div class=container>
+	<div class=row>
+		<div class=col-10>
+			<br/>
+			<% @posts.each do |post| %>
+			<div class="card" style="width: 50%;">
+				<%= image_tag post.image.url%>
+				<div class="card-body">
+					<h5 class="card-title">Card title</h5>
+<!--					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+-->
+				</div>
+			</div>
+			<br/>
+			<% end %>
+
+		</div>
+	</div>
+</div>
