@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 	end
 	def create
 		@post = Post.new(post_params)
-		@post.user_id = current_user
+		@post.user_id = current_user.id if user_signed_in?
 		if @post.save
 			redirect_to home_path
 		else

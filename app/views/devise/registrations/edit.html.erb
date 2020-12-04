@@ -1,43 +1,114 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container">
+  <div class="form-horizontal">
+    <div class=form-group>
+      <div class="form-group" style="margin-bottom:50px">
+        <div class="container login-shadow" style="width: 800px; border-radius: 2px;padding: 15px 20px;background-color: #fff">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6 col-sm-6 form-group">
+                <h2 style="text-align: left;font-weight: bold;">Edit Profile</h2>
+              </div>
+              <div class="col-md-6 col-sm-6 form-group" style="margin-left:-320px">
+                <h4><%= link_to "Back to Profile", :back, class:"btn btn-login" %></h4>
+              </div> 
+            </div>           
+          </div>
+          <hr>
+          <div class="form-group" style="text-align: left">
+              <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Profile Picture</p>
+              <%= image_tag @user.image.url,class: "img-profilepicture"%>
+              <%= f.file_field :image %>
+              <%= f.hidden_field :image_cache %>
+          </div>  
+          <div class="form-row">
+            <div class="col-md-6 col-sm-6 form-group">
+              <p style="text-align: left;font-size: 12px; margin-bottom: -15px">First Name</p>
+            </div>
+            <div class="col-md-6 col-sm-6 form-group">
+              <p style="text-align: left;font-size: 12px; margin-bottom: -15px">Last Name</p>
+            </div> 
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 col-sm-6 form-group">
+              <%= f.text_field :first_name,autofocus: true, class: "form-control",placeholder: "First Name" %>
+            </div>
+            <div class="col-md-6 col-sm-6 form-group">
+              <%= f.text_field :last_name,class: "form-control",placeholder: "Surname" %>
+            </div> 
+          </div>
+          <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Email</p>
+          <div class="form-group">
+            <%= f.email_field :email,class: "form-control",placeholder: "Email"%>
+          </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <div class="form-group">
+            <p style="text-align: left;font-size: 12px; margin-bottom: -3px">Date of Birth</p>
+            <%= f.date_field :birth_date,class: "form-control",placeholder: "Birth Date"%>
+          </div>
+          <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Gender</p>
+          <div class="form-row container">
+            <div class="col-md-4 col-sm-4 form-group">
+              <%= f.radio_button(:gender, "Male") %>
+              <%= f.label(:gender_male, "Male") %>
+            </div>
+            <div class="col-md-4 col-sm-4 form-group">            
+              <%= f.radio_button(:gender, "Female") %>
+              <%= f.label(:gender_female, "Female") %>
+            </div>
+            <div class="col-md-4 col-sm-4 form-group">            
+              <%= f.radio_button(:gender, "Other") %>
+              <%= f.label(:gender_other, "Other") %>
+            </div>            
+          </div>
+          <div class="form-group">
+            <div class="form-row" >
+              <div class="col-md-8 col-sm-8 form-group" style="margin-bottom: -1px">            
+                <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Password<em>(leave blank if you don't want to change it).</em></p>
+              </div>
+              <div class="col-md-4 col-sm-4 form-group" style="margin-bottom: -1px">            
+               <% if @minimum_password_length %>
+               <p style="text-align: left;font-size: 12px;margin-left: -230px; margin-bottom: -1px"><em><%= @minimum_password_length %> characters minimum</em></p>
+               <% end %>
+             </div>            
+           </div>
+           <%= f.password_field :password,class: "form-control",placeholder: "New Password" %>
+         </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+         <div class="form-group">
+          <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Password confirmation</p>
+          <%= f.password_field :password_confirmation,class: "form-control",placeholder: "Confirm Password"%>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="form-group">
+          <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Current Password<em>(we need your current password to confirm your changes)</em></p>
+          <%= f.password_field :current_password,class: "form-control",placeholder: "Current Password"%>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Update", class:"btn btn-info" %>
+        </div>
+      <% end %>
+        <hr>
+        <div class="form-group">
+         <h3 style="text-align: left;font-weight: bold;">Cancel My Account</h3>
+       </div>
+       <div class="form-group" style="text-align: left">
+        <%= button_to "Cancel my account", registration_path(resource_name),class:"btn btn-danger", data: { confirm: "Are you sure?" }, method: :delete %>
+      </div>
+
+
+    </div>
   </div>
+</div>
+</div>
+</div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
