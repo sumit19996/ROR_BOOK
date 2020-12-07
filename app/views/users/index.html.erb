@@ -1,15 +1,75 @@
 <div class=container>
 	<div class=row>
-		<div class=col-8>
-			<% @posts.each do |post| %>
-				<div class="post-fb">
-					<div class="post-meta">
-						<p style="margin-bottom: -2px"><%= post.user.full_name %></p>
-						<p><%= post.user.created_at.to_date %></p>
+		<div class="col-3 home-left-box">
+			<div class="container">
+				<div class="form-horizontal ">
+					<% if current_user.image.present? %>
+					<%= link_to (profile_path(current_user.id) )do %>
+					<%= image_tag current_user.image.url,class: "img-profilepicture-home hover-box"%>
+					<% end %>					
+					<% end %>
+					<div style="margin-top:-5px">
+						<%= link_to (profile_path(current_user.id) )do %>
+						<p style="text-align: left;color: #000"><%= current_user.full_name %></p>
+						<% end %>
 					</div>
-					<%= image_tag post.image.url,style:"width:100%;height:auto"%>
-				</div>			
+				</div>
+			</div>
+		</div>
+		<div class=col-6>
+				<div class="form-horizontal">
+					<div class=form-group>
+						<div class="form-group">
+							<div class="container post-fb" style="background-color: #fff">
+								<%= form_for @new_post, html: { multipart: true } do |f| %>
+								<div class="form-horizontal" style="border: 5px solid #fff">	
+									<div class="form-row">
+										<div class="col-3">			
+											<% if current_user.image.present? %>
+											<%= image_tag current_user.image.url,class: "img-profilepicture-new-post"%>
+											<% end %>
+										</div>
+										<div class="col-9">			
+											<%= f.text_area :caption,class:"caption",placeholder:"What's on your mind?" %>
+										</div>
+									</div>
+									<br>
+									<div class="form-row">
+										<div class="col-6" >			
+											<%= f.file_field :image %>
+											<%= f.hidden_field :image_cache %>
+										</div>
+										<div class="col-6">			
+											<%= f.submit "Create",class:"btn btn-login  bg-blue text-white"%>
+										</div>
+									</div>
+								</div>
+							</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			<% @posts.each do |post| %>
+			<div class="post-fb">
+				<div class="post-meta">
+					<div class="form-row">
+						<div class="col-3">
+							<% if post.user.image.present? %>
+							<%= image_tag post.user.image.url,class: "img-profilepicture-post"%>
+							<% end %>
+						</div>
+						<div class="col-9" style="margin-left:-55px">
+							<p style="margin-bottom: -2px;text-align: left"><%= post.user.full_name %></p>
+							<p style="text-align: left"><%= post.user.created_at.to_date %></p>
+						</div>
+					</div>
+				</div>
+				<p style="text-align: left"><%= post.caption %></p>
+				<%= image_tag post.image.url,style:"width:100%;height:auto"%>
+			</div>			
 			<% end %>
+		</div>
+		<div class="col-3">
 		</div>
 	</div>
 </div>
