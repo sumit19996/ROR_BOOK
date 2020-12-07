@@ -1,3 +1,36 @@
-<h1>User Profile</h1>
-<%= @user.full_name %>
-<%= link_to "Edit Profile", edit_user_registration_path(current_user.id)%>
+<div class="w-100 float-left position-relative">
+	<div class="container">
+		<div class="form-horizontal"  style="margin-top: -25px">
+			<div class=form-group>
+				<div class="form-group" style="position:relative">
+					<% if @user.cover_image.present? %>
+					<%= image_tag @user.cover_image.url,class:"img-coverpicture-profile"%>
+					<% end %>
+					<div class="form-group">
+						<%= link_to (edit_user_registration_path(current_user.id)), class: "btn btn-secondary icon-camera-btn form-control",style:"width: 190px" do%>
+						<i class="fa fa-camera"style="font-size: 19px" aria-hidden="true"></i> Edit Cover Photo
+						<% end %>
+					</div>
+				</div>	
+				<div class="form-group" style="margin-bottom:25px">
+					<% if @user.image.present? %>
+					<%= image_tag @user.image.url,class: "img-profilepicture-profile"%>
+					<% end %>
+					<div class="form-group">
+						<%= link_to (edit_user_registration_path(current_user.id)), class: "icon-camera" do%>
+						<i class="fa fa-camera fa-2x"style="font-size: 25px" aria-hidden="true"></i>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="w-100 float-left position-relative">
+	<div class="container">
+		<div class="form-group">
+			<h2><strong><%= @user.full_name %></strong></h2>
+		</div>	
+	</div>
+	<hr class="dark">
+</div>

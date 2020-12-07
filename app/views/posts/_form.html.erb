@@ -1,6 +1,24 @@
-<%= form_for @post, html: { multipart: true } do |f| %>
-    <%= f.file_field :image %>
-    <%= f.hidden_field :image_cache %>
-    <%= f.submit "Create",class:"btn btn-login  bg-blue text-white"%>
-  </p>
-<% end %>
+<div class="container">
+	<div class="form-horizontal">
+		<div class=form-group>
+			<div class="form-group" style="margin-bottom:50px">
+				<div class="container login-shadow" style="width: 800px; border-radius: 2px;padding: 15px 20px;background-color: #fff">
+					<h2> New Post </h2>
+					<%= form_for @post, html: { multipart: true } do |f| %>
+					<div class="form-group" style="text-align: center">			
+						<%= f.file_field :image %>
+						<%= f.hidden_field :image_cache %>
+					</div>
+					<div class="form-group">			
+						<%= f.text_area :caption %>
+					</div>
+					<div class="form-group">			
+						<%= f.submit "Create",class:"btn btn-login  bg-blue text-white"%>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+</div>
+</div>
