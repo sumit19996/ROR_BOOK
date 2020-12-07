@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :posts
   mount_uploader :image, ImageUploader
+  mount_uploader :cover_image, ImageUploader
   def full_name
   	"#{first_name} #{last_name}"
   end

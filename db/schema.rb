@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_122125) do
+ActiveRecord::Schema.define(version: 2020_12_07_122156) do
 
   create_table "posts", force: :cascade do |t|
     t.string "image"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "caption"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_122125) do
     t.text "gender"
     t.string "image"
     t.text "about"
+    t.string "cover_image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
