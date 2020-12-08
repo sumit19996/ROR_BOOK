@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+	respond_to :js,:json, :html
 	def new
 		@post = Post.new
 	end
@@ -9,11 +9,24 @@ class PostsController < ApplicationController
 		if @post.save
 			redirect_to home_path
 		else
-			redirect_to new_post_path, { flash: "Post created Successfully"}
+			flash[:alert] = "Both Caption and Image Can't be Blank"
+			redirect_back(fallback_location: root_path)
 		end
 	end
 	def show
+	end
 
+	def like
+		@post = Post.all.find(params[:id])
+		Like.create(post_id: params[:post_id], user_id:current_user.id)
+		redirect_to post_path(@post)
+	end
+	def vote
+		if !current_user.liked? @post
+			@post.liked_by current_user
+		elsif current_user.liked? @post
+			@post.unliked_by current_user
+		end
 	end
 	private
 	def post_params

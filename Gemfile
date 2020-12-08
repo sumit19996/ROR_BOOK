@@ -21,10 +21,12 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'jquery-rails'
 
 #devise gem for authentication
 gem 'devise'
+#act_as_votable to count likes
+gem 'acts_as_votable'
 
 #carrierwave gem for image uploading
 gem 'carrierwave', '~> 2.0'
