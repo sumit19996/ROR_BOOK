@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+	before_action :authenticate_user!
+	
 	respond_to :js,:json, :html
 	def new
 		@post = Post.new
@@ -17,9 +19,15 @@ class PostsController < ApplicationController
 	end
 
 	def like
-		@post = Post.all.find(params[:id])
-		Like.create(post_id: params[:post_id], user_id:current_user.id)
-		redirect_to post_path(@post)
+		@post = Post.find(params[:id])
+		if params[:format] == 'like'
+			@post.liked_by current_user
+		elsif 
+			@post.unliked_by current_user
+		end
+			
+		#Like.create(post_id: params[:post_id], user_id:current_user.id)
+		#redirect_to post_path(@post)
 	end
 	def vote
 		if !current_user.liked? @post
