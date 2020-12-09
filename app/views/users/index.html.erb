@@ -81,10 +81,9 @@
 					<%= image_tag post.image.url,style:"width:100%;height:auto"%>
 				<% end %>
 				<div class="post-actions">
-
-					<span class="likes-count"><%= post.get_upvotes.size%></span>
+					<i class="fa fa-heart like-<%= post.id %> post-like" data-id="<%= post.id %>" onclick= "myFunction(this)"></i>
 					<i class="fa fa-comment post-comment"></i>
-				</div>			
+				</div>
 			</div>
 			<% end %>
 		</div>
@@ -93,13 +92,21 @@
 	</div>
 </div>
 <script type="text/javascript">
-	 function required(inputtx) 
-   {
-     if (inputtx.value.length == 0)
-      { 
-         alert("Please write caption");  	
-         return false; 
-      }  	
-      return true; 
-    } 
+	function myFunction(x){
+
+		$(function(){
+		$(".post-like").on("click",function(){
+			var post_id = $(x).data("id");
+
+			$.ajax({
+				url: "/post/like/"+post_id,
+				method: "GET"
+			}).done(function(response){
+				console.log(response);
+				})
+		})
+});
+
+	}
+
 </script>

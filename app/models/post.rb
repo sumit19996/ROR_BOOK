@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
+	default_scope {order(created_at: :desc)}
 	acts_as_votable
 	mount_uploader :image, ImageUploader
 	belongs_to :user
-	has_many :likes, dependent: :destroy
+	has_many :likes
 	validate :any_present?
 	def any_present?
 		if caption.blank? && image.blank?

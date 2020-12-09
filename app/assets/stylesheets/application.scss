@@ -157,7 +157,7 @@ box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
 }
 .post-actions{
   margin: 10px;
-    text-align:left;
+  text-align:left;
   i{
   margin-right: 10 px;
   font-size: 25px;
@@ -167,11 +167,19 @@ box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
   i:hover{
   color: #999;
   }
-  i.active {
-  color: #007bff;
+  i.active{
+  color: red;
   }
 }
 .blank-error{
   text-align : left;
+  color: red;
+}
+
+.unlike-button {
+  color: grey;
+}
+
+.like-button {
   color: red;
 }
