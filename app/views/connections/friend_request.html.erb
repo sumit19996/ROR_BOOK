@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="form-horizontal">
+    <div class=form-group>
+      <div class="form-group" style="margin-bottom:50px">
+        <div class="container login-shadow" style="width: 500px; border-radius: 5px;padding: 15px 20px;background-color: #fff">
+          <div class="form-group" style="text-align: left;margin-top: 20px">
+            <h2><strong>Friend Requests</strong></h2>
+          </div>
+          <hr class="dark">
+          <% @requests.each do |request| %>
+            <% user = User.find_by_id(request.sender_id) %>
+            <div class="form-group" style="padding-top: 12px">
+              <div class="form-row">
+                <div class="col-2">
+                  <% if user.image.present? %>
+                  <%= link_to (profile_path(user.id) )do %>
+                  <%= image_tag user.image.url,class: "img-profilepicture-post hover-box"%>
+                  <% end %>       
+                  <% end %>                        
+                </div>
+                <div class="col-6">
+                  <%= link_to (profile_path(user.id) )do %>
+                  <p style="text-align: left;color: #000;margin-top: 2px;margin-left:20px;font-size: 22px"><strong><%= user.full_name %></strong></p>
+                  <% end %>
+                </div>
+                <div class="col-2">
+                  <input  type="button" value="Deny" id="deny_button" onclick= "destroyRequest(<%= @id %>)" class="btn btn-danger"/>
+                </div>
+                <div class="col-2">
+                  <input  type="button" value="Accept" id="accept_button" onclick= "acceptRequest(<%= user.id %>)" class="btn btn-success"/>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function acceptRequest(sender){
+    $.ajax({
+      url: "/connections",
+      type: "POST",
+      data: {"sender_id" : sender},
+      dataType: "json",
+      success: function(data) {
+        location.reload();
+      }
+    });  
+  }
+  function destroyRequest(req_id){ 
+    $.ajax({
+      url: "/requests/"+req_id,
+      type: "DELETE",
+      dataType: "json",
+      success: function(data) {
+       location.reload();
+     }
+   });  
+  }
+</script>
