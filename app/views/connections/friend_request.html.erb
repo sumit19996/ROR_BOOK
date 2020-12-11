@@ -24,10 +24,10 @@
                   <% end %>
                 </div>
                 <div class="col-2">
-                  <input  type="button" value="Deny" id="deny_button" onclick= "destroyRequest(<%= @id %>)" class="btn btn-danger"/>
+                  <input  type="button" value="Deny" id="deny_button" onclick= "denyRequest(<%= request.id %>)" class="btn btn-danger"/>
                 </div>
                 <div class="col-2">
-                  <input  type="button" value="Accept" id="accept_button" onclick= "acceptRequest(<%= user.id %>)" class="btn btn-success"/>
+                  <input  type="button" value="Accept" id="accept_button" onclick= "acceptRequest(<%= user.id %>,<%= request.id %>)" class="btn btn-success"/>
                 </div>
               </div>
             </div>
@@ -40,21 +40,22 @@
 
 
 <script type="text/javascript">
-  function acceptRequest(sender){
+  function acceptRequest(sender,request_id){
     $.ajax({
       url: "/connections",
       type: "POST",
-      data: {"sender_id" : sender},
+      data: {"sender_id" : sender,"request_id": request_id},
       dataType: "json",
       success: function(data) {
         location.reload();
       }
     });  
   }
-  function destroyRequest(req_id){ 
+  function denyRequest(request_id){ 
     $.ajax({
-      url: "/requests/"+req_id,
-      type: "DELETE",
+      url: "/requests/"+request_id,
+      type: "PUT",
+      data: {"request_id": request_id},
       dataType: "json",
       success: function(data) {
        location.reload();

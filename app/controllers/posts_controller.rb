@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 		@post.user_id = current_user.id if user_signed_in?
 		if @post.save
-			redirect_to home_path
+			redirect_back(fallback_location: root_path)
 		else
 			flash[:alert] = "Both Caption and Image Can't be Blank"
 			redirect_back(fallback_location: root_path)

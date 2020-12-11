@@ -11,5 +11,27 @@ class User < ApplicationRecord
   def full_name
   	"#{first_name} #{last_name}"
   end
+  #after_commit :add_default_image, on: [:create]
 
+  private
+  def add_default_image
+    if self.gender = "Male"
+      self.image.attach(
+        io: File.open(
+          Rails.root.join(
+            'app', 'assets', 'images', 'male.jpg'
+            )
+          ), filename: 'default-image.jpg',
+          content_type: 'image/jpg'
+        )
+    elsif self.gender = "Female"
+      self.image.attach(
+        io: File.open(
+          Rails.root.join(
+            'app', 'assets', 'images', 'female.jpg'
+            )
+          ), filename: 'default-image.jpg',
+          content_type: 'image/jpg'
+        )    end   
+  end
 end
