@@ -12,11 +12,24 @@ class RequestsController < ApplicationController
 			redirect_back(fallback_location: root_path)
 		end
 	end
-	def friend_request
+	def update
+		@req = Request.find_by_id(params[:request_id])
+		@req.status = 2
+		if @req.save
+			flash[:success] = "Friend Request Rejected"
+		else
+			redirect_back(fallback_location: root_path)
+		end
 	end
 	def add_friend
-		@users = User.where.not(id: current_user.id)
-		@requests = Request.where(sender_id: current_user.id)
+		@connections = Connection.where(sender_id: current_user.id).or(Connection.where(reciever_id: current_user.id))
+		@friends = Array.new
+		@connections.each do |connection|
+			@friends << connection.find_friends(current_user.id)
+		end
+		@friends << current_user.id
+		@users = User.where.not(id: @friends)
+		@requests = Request.pending.where(sender_id: current_user.id)
 	end
 	def destroy
 		@request = Request.find(params[:id])

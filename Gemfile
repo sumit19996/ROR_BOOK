@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 
+gem 'rake'
 #devise gem for authentication
 gem 'devise'
 #act_as_votable to count likes

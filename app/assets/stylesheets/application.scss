@@ -20,6 +20,18 @@ box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.3);
   font-weight: bold;
   border-radius: 5px;
 }
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  font-weight: bold;
+  
+}
+.btn-danger:hover {
+  color: #fff;
+  background-color: #AE1E2C;
+  border-color: #AE1E2C;
+}
 .btn-login {
   color: #fff;
   background-color: #1877f2;
@@ -37,6 +49,11 @@ border-radius: 50%;
 border: 4px solid #999;
 width : 150px;
 height : 150px;
+}
+.img-friendspicture{
+border-radius: 10px;
+width : 90px;
+height : 90px;
 }
 .img-profilepicture-post{
 border-radius: 50%;
@@ -137,6 +154,7 @@ hr.dark{
 }
 .post-fb{
   margin-bottom : 20px;
+  padding: 10px;
   border: 5px solid #fff;
   border-radius :10px;
   -webkit-box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.3);
@@ -151,6 +169,13 @@ hr.dark{
 -webkit-box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
 -moz-box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
 box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
+}
+.friends-box{
+  border: 5px solid #fff;
+  border-radius :10px;
+  -webkit-box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.3);
+  -moz-box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.68);
+  box-shadow: 6px -2px 23px 5px rgba(122,117,122,0.3);
 }
 .hover-box:hover{
   border-color:#fff

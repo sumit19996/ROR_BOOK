@@ -22,45 +22,45 @@
 			</div>
 		</div>
 		<div class=col-6>
-				<div class="form-horizontal">
-					<div class=form-group>
-						<div class="form-group">
-							<div class="container post-fb" style="background-color: #fff">
-								<%= form_for @post, html: { multipart: true } do |f| %>
-								<div class="form-horizontal" style="border: 5px solid #fff">
-									<div class="form-group">
-										<% flash.each do |type, msg| %>
-										<div class="blank-error">
-											<%= msg %>
-										</div>
+			<div class="form-horizontal">
+				<div class=form-group>
+					<div class="form-group">
+						<div class="container post-fb" style="background-color: #fff">
+							<%= form_for @post, html: { multipart: true } do |f| %>
+							<div class="form-horizontal" style="border: 5px solid #fff">
+								<div class="form-group">
+									<% flash.each do |type, msg| %>
+									<div class="blank-error">
+										<%= msg %>
+									</div>
+									<% end %>
+								</div>
+								<div class="form-row">
+									<div class="col-3">			
+										<% if current_user.image.present? %>
+										<%= image_tag current_user.image.url,class: "img-profilepicture-new-post"%>
 										<% end %>
 									</div>
-									<div class="form-row">
-										<div class="col-3">			
-											<% if current_user.image.present? %>
-											<%= image_tag current_user.image.url,class: "img-profilepicture-new-post"%>
-											<% end %>
-										</div>
-										<div class="col-9">			
-											<%= f.text_area :caption,class:"caption",placeholder:"What's on your mind?" %>
-										</div>
-									</div>
-									<br>
-									<div class="form-row">
-										<div class="col-6" >			
-											<%= f.file_field :image %>
-											<%= f.hidden_field :image_cache %>
-										</div>
-											<div class="col-6">			
-												<%= f.submit "Create",class:"btn btn-login  bg-blue text-white"%>
-											</div>
+									<div class="col-9">			
+										<%= f.text_area :caption,class:"caption",placeholder:"What's on your mind?" %>
 									</div>
 								</div>
+								<br>
+								<div class="form-row">
+									<div class="col-6" >			
+										<%= f.file_field :image %>
+										<%= f.hidden_field :image_cache %>
+									</div>
+										<div class="col-6">			
+											<%= f.submit "Create",class:"btn btn-login  bg-blue text-white"%>
+										</div>
+								</div>
 							</div>
-							<% end %>
 						</div>
+						<% end %>
 					</div>
 				</div>
+			</div>
 			<% @posts.each do |post| %>
 			<div class="post-fb">
 				<div class="post-meta">
