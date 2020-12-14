@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get '/home', to: 'users#index'
   get 'users/:id', to: 'users#profile', as: :profile
-  get 'post/like/:post_id', to: 'likes#save_like', as: :like_post
   get '/add_friend', to: 'requests#add_friend'
   get '/friend_request', to: 'connections#friend_request'
-  resources :posts
+  resources :posts do
+    resources :comments
+    resources :likes
+  end
   resources :requests
   resources :connections
   root to: "public#index"

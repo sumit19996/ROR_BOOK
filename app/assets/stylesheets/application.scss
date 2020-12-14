@@ -69,14 +69,33 @@ width : 50px;
 height : 50px;
 margin-left:-70px;
 }
+.img-profilepicture-comment{
+border-radius: 50%;
+border: 2px solid #999;
+width : 40px;
+height : 40px;
+margin-top: 5px;
+margin-left:-40px;
+}
 .caption{
-    padding: 10px 0px 0px 10px;
+  padding: 10px 0px 0px 10px;
   width : 120%;
   margin-left:-70px;
   margin-top:-6px;
   background-color:#EBEBEB;
   border-color:#EBEBEB;
   border-radius: 30px;
+}
+.comment-body{
+  padding: 10px 0px 3px 10px;
+  width : auto;
+  font-size: 15px;
+  background-color:#F3F3F6;
+  border-color:#F3F3F6;
+  border-radius: 20px;
+  margin-top: -3px;
+  margin-left: -30px;
+  text-align: left;
 }
 .img-profilepicture-home{
 border-radius: 50%;
@@ -193,7 +212,7 @@ box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
   color: #999;
   }
   i.active{
-  color: red;
+  color: blue;
   }
 }
 .blank-error{
@@ -201,10 +220,11 @@ box-shadow: 5px 2px 25px 9px rgba(227,227,227,1);
   color: red;
 }
 
-.unlike-button {
-  color: grey;
+.like_button{
+  border: none;
+  background-color: #fff;
 }
-
-.like-button {
-  color: red;
+.like_button:hover{
+  border: none;
+  background-color: #fff;
 }
