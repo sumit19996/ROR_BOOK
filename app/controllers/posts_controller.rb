@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 		if @post.save
 			redirect_back(fallback_location: root_path)
 		else
-			flash[:alert] = "Both Caption and Image Can't be Blank"
+			flash[:error] = "Both Caption and Image Can't be Blank"
 			redirect_back(fallback_location: root_path)
 		end
 	end
@@ -36,6 +36,8 @@ class PostsController < ApplicationController
 			@post.unliked_by current_user
 		end
 	end
+	
+
 	private
 	def post_params
 		params.require(:post).permit(:image,:image_cache,:caption)

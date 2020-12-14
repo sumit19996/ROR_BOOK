@@ -4,6 +4,7 @@ class Post < ApplicationRecord
 	mount_uploader :image, ImageUploader
 	belongs_to :user
 	has_many :likes
+	has_many :comments
 	validate :any_present?
 	def any_present?
 		if caption.blank? && image.blank?
