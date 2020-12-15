@@ -1,0 +1,2 @@
+alert("Delete Comment?");
+$("#post-comment<%= @post.id%>").html("<%= j render(:partial => 'users/comment', locals: {post: @post}) %>");

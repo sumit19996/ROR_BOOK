@@ -83,39 +83,26 @@
 				<%= image_tag post.image.url,style:"width:100%;height:auto"%>
 				<% end %>
 				<div class="post-actions" >
-					<div id="post-<%= post.id%>">
-					  <%= render partial: 'like_button', locals: {post: post} %>
-					</div>
-					<i class="fa fa-comment post-comment"></i>
-				</div>
-				<% post.comments.each do |comment| %>
-				<div class="form-row" style="margin-bottom: 10px">
-					<div class="col-2">			
-						<% if comment.user.image.present? %>
-						<%= image_tag comment.user.image.url,class: "img-profilepicture-comment"%>
-						<% end %>
-					</div>
-					<div class="col-10">			
-						<div class="comment-body">
-							<p><strong><%= comment.user.full_name %></strong></p>
-							<p style="margin-top:-15px"><%= comment.content %></p>
-							<p style="margin-top:-15px;font-size:10px;color:grey"><%= time_ago_in_words comment.created_at %></p>
+					<div class="row">
+						<div class="col-1">
+							<div id="post-<%= post.id%>">
+							  <%= render partial: 'like_button', locals: {post: post} %>
+							  <span>
+							  	<%if post.likes_count == 1%>
+							  		<%= post.likes_count %><span>like</span>
+							  	<% elsif post.likes_count > 1 %>
+							  		<%= post.likes_count %><span>likes</span>
+							  	<% end %>							  		
+							  </span>
+							</div>
+						</div>
+						<div class="col-1">
+							<i class="fa fa-comment"></i>
 						</div>
 					</div>
 				</div>
-				<% end %>
-				<div class="form-row" style="margin-bottom: 10px">
-					<div class="col-2">			
-						<% if current_user.image.present? %>
-						<%= image_tag current_user.image.url,class: "img-profilepicture-comment"%>
-						<% end %>
-					</div>
-					<div class="col-8" style="margin-top:7px">			
-							<input type="text_area" id="content" class="comment-body form-control" style="width:105%;height:40px">
-					</div>
-					<div class="col-2"style="margin-top:7px">			
-						<input type="button" value="create" class="btn btn-login  bg-blue text-white"style="height:40px;border-radius:10px" onclick="create_comment(<%= post.id %>)">
-					</div>
+				<div id="post-comment<%= post.id%>">
+					<%= render partial: 'comment', locals: {post: post} %>
 				</div>
 			</div>
 			<% end %>
@@ -136,17 +123,4 @@
   //     }
   //   });  
   // }
-  function create_comment(post_id){
-  	var element = document.getElementById("content");
-    $.ajax({
-      url: "/posts/"+post_id+"/comments",
-      type: "POST",
-      data: {comment: {content: element.value}},
-      dataType: "json",
-      success: function(data) {
-      	location.reload();
-      }
-    });  
-  }
-
 </script>

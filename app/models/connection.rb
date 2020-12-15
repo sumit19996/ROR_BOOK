@@ -1,10 +1,12 @@
 class Connection < ApplicationRecord
+  belongs_to :sender, class_name: :User
+  belongs_to :reciever, class_name: :User
 
-	def find_friends(id)
+	def find_friend_id(id)
 		if sender_id == id
-			return reciever_id
+		  reciever_id
 		else
-			return sender_id
+		  sender_id
 		end
 	end
 end

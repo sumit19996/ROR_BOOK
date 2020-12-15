@@ -43,6 +43,10 @@
               <%= f.radio_button(:gender, "Other") %>
               <%= f.label(:gender_other, "Other") %>
             </div>            
+          </div>
+          <div class="form-group">
+            <%= f.file_field :image %>
+            <%= f.hidden_field :image_cache %>
           </div>    
           <div class="form-group">
             <% if @minimum_password_length %>
