@@ -1,3 +1,9 @@
-<%= button_to post_likes_path(post.id),class:"like_button", remote: true do %>
-	<i class="fa fa-thumbs-up <%= post.liked?(current_user) ? 'active' : '' %>"  id="like_button" ></i>
+<% if post.liked?(current_user) %>
+	<%= link_to(post_like_path(id: post.like(current_user),post_id:post.id), method: :delete,remote: true) do %>
+		<i class="fa fa-thumbs-up active"  id="like_button"></i>
+	<% end %>
+<% else %>
+	<%= link_to post_likes_path(post.id),class:"like_button",method: :post, remote: true do %>
+		<i class="fa fa-thumbs-up"  id="like_button" ></i>
+	<% end %>
 <% end %>

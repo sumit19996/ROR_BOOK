@@ -1,0 +1,48 @@
+<% post.comments.each do |comment| %>
+<div class="form-row" style="margin-bottom: 10px">
+	<div class="col-2">			
+		<% if comment.user.image.present? %>
+		<%= image_tag comment.user.image.url,class: "img-profilepicture-comment"%>
+		<% end %>
+	</div>
+	<div class="col-10">			
+		<div class="form-row">
+			<div class="col-11">
+				<div class="comment-body">
+					<p><strong><%= comment.user.full_name %></strong></p>
+					<p style="margin-top:-15px"><%= comment.content %></p>
+					<p style="margin-top:-15px;font-size:10px;color:grey"><%= time_ago_in_words comment.created_at %></p>
+				</div>
+			</div>
+			<div class="col-1">
+				<% if post.user_id == current_user.id %>
+					<%= link_to(post_comment_path(id: comment.id,post_id:post.id), method: :delete,remote: true) do %>
+						<i class="fa fa-trash-alt" style="color:red;font-size:10px"></i>
+					<% end %>
+				<% else %>
+					<% if comment.user_id == current_user.id %>
+						<%= link_to(post_comment_path(id: comment.id,post_id:post.id), method: :delete,remote: true) do %>
+							<i class="fa fa-trash-alt" style="color:red;font-size:10px"></i>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
+	</div>
+	</div>
+</div>
+<% end %>
+<%= form_for Comment.new, url: post_comments_path(post), remote: true do |f| %>
+	<div class="form-row" style="margin-bottom: 10px">
+			<div class="col-2">			
+				<% if current_user.image.present? %>
+				  <%= image_tag current_user.image.url,class: "img-profilepicture-comment"%>
+				<% end %>
+			</div>
+			<div class="col-8"style="margin-top:7px" >			
+			  <%= f.text_field :content,id:"content",class: "comment-body form-control",style:"width:105%;height:40px" %>
+			</div>
+			<div class="col-2"style="margin-top:7px" >			
+			  <%= f.submit :create,class: "btn btn-login" %>
+			</div>
+	</div>
+<% end %>
