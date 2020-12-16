@@ -39,7 +39,7 @@
 				<% end %>
 			</div>
 			<div class="col-8"style="margin-top:7px" >			
-			  <%= f.text_field :content,id:"content",class: "comment-body form-control",style:"width:105%;height:40px" %>
+			  <%= f.text_field :content,class: "comment-body form-control",style:"width:105%;height:40px", autocomplete: "off" %>
 			</div>
 			<div class="col-2"style="margin-top:7px" >			
 			  <%= f.submit :create,class: "btn btn-login" %>

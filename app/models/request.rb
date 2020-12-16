@@ -1,3 +1,6 @@
 class Request < ApplicationRecord
-	 enum status: [:pending, :accepted, :rejected]
+	enum status: [:pending, :accepted, :rejected]
+	
+	belongs_to :sender, class_name: :User
+  belongs_to :reciever, class_name: :User
 end

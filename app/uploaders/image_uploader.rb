@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -13,12 +13,15 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+ 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
-    # For Rails 3.1+ asset pipeline compatibility:
-    ActionController::Base.helpers.asset_path("/" + [version_name, "default.png"].compact.join('_'))
-    #"assets/images/male.jpg"
-    #{}"/images/fallback/" + [version_name, "default.png"].compact.join('_')
+    if profile.model.gender == "Male"
+      ActionController::Base.helpers.asset_path("male.jpg")
+    else
+      ActionController::Base.helpers.asset_path("female.jpg")
+    end
+  #   "assets/images/"+ ["default.png"].compact.join('_')
   end
 
   # Process files as they are uploaded:
@@ -32,6 +35,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
+  version :profile do
+    process resize_to_fit: [50, 50]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

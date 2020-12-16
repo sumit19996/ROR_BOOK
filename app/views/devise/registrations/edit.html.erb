@@ -20,9 +20,9 @@
             <p style="text-align: left;font-size: 12px; margin-bottom: -1px">Profile Picture</p>
             <% if @user.image.present? %>
             <%= image_tag @user.image.url,class: "img-profilepicture"%>
-            <p><strong>Change profile Picture</strong></p>
+            <p><strong>Change Profile Picture</strong></p>
             <% else %>
-            <p><strong>Add a profile Picture</strong></p>
+            <p><strong>Add a Profile Picture</strong></p>
             <% end %>
             <%= f.file_field :image %>
             <%= f.hidden_field :image_cache %>
