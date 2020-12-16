@@ -1,28 +1,7 @@
 <div class="w-100 float-left position-relative">
 	<div class="container">
 		<div class="form-horizontal"  style="margin-top: -25px">
-			<div class=form-group>
-				<div class="form-group" style="position:relative">
-					<% if @user.cover_image.present? %>
-					<%= image_tag @user.cover_image.url,class:"img-coverpicture-profile"%>
-					<% end %>
-					<div class="form-group">
-						<%= link_to (edit_user_registration_path(current_user.id)), class: "btn btn-secondary icon-camera-btn form-control",style:"width: 190px" do%>
-						<i class="fa fa-camera"style="font-size: 19px" aria-hidden="true"></i> Edit Cover Photo
-						<% end %>
-					</div>
-				</div>	
-				<div class="form-group" style="margin-bottom:25px">
-					<% if @user.image.present? %>
-					<%= image_tag @user.image.url,class: "img-profilepicture-profile"%>
-					<% end %>
-					<div class="form-group">
-						<%= link_to (edit_user_registration_path(current_user.id)), class: "icon-camera" do%>
-						<i class="fa fa-camera fa-2x"style="font-size: 25px" aria-hidden="true"></i>
-						<% end %>
-					</div>
-				</div>
-			</div>
+			<%= render "users/profile/image_section" %>
 		</div>
 	</div>
 </div>
@@ -60,11 +39,9 @@
 						<div class="col-md-12 p-0">
 							<% @friend_list.each do |friend| %>
 								<div class="col-4 float-left pl-3" style="height: 140px">
-										<% if friend.image.present? %>
-											<%= link_to (profile_path(friend.id) )do %>
-												<%= image_tag friend.image.url,class: "img-friendspicture hover-box w-100"%>
+										<%= link_to (profile_path(friend.id) )do %>
+											<%= image_tag friend.image.url,class: "img-friendspicture hover-box w-100"%>
 											<% end %>					
-										<% end %>
 										<%= link_to (profile_path(friend.id) )do %>
 											<p style="text-align: left;color: #000;font-size:12px"><%= friend.full_name %></p>
 										<% end %>
@@ -76,72 +53,7 @@
 			</div>
 		</div>
 		<div class="col-7">
-			<% if @user == current_user %>
-				<div class="form-horizontal" style="margin-top: 5px;">
-					<div class=form-group>
-						<div class="form-group">
-							<div class="container post-fb" style="background-color: #fff">
-								<%= form_for @post, html: { multipart: true } do |f| %>
-								<div class="form-horizontal" style="border: 5px solid #fff">
-									<div class="form-group">
-										<% flash.each do |type, msg| %>
-										<div class="blank-error">
-											<%= msg %>
-										</div>
-										<% end %>
-									</div>
-									<div class="form-row">
-										<div class="col-3">			
-											<% if current_user.image.present? %>
-											<%= image_tag current_user.image.url,class: "img-profilepicture-new-post"%>
-											<% end %>
-										</div>
-										<div class="col-9">			
-											<%= f.text_area :caption,class:"caption",placeholder:"What's on your mind?" %>
-										</div>
-									</div>
-									<br>
-									<div class="form-row">
-										<div class="col-6" >			
-											<%= f.file_field :image %>
-											<%= f.hidden_field :image_cache %>
-										</div>
-										<div class="col-6">			
-											<%= f.submit "Create",class:"btn btn-login  bg-blue text-white"%>
-										</div>
-									</div>
-								</div>
-							</div>
-							<% end %>
-						</div>
-					</div>
-				</div>
-			<% end %>
-			<% @posts.each do |post| %>
-			<div class="post-fb">
-				<div class="post-meta">
-					<div class="form-row">
-						<div class="col-3">
-							<% if post.user.image.present? %>
-							<%= image_tag post.user.image.url,class: "img-profilepicture-post"%>
-							<% end %>
-						</div>
-						<div class="col-9" style="margin-left:-55px">
-							<p style="margin-bottom: -2px;text-align: left"><%= post.user.full_name %></p>
-							<p style="text-align: left;font-weight: normal;font-size: 12px;color:grey	"><%= time_ago_in_words post.created_at %></p>
-						</div>
-					</div>
-				</div>
-				<p style="text-align: left"><%= post.caption %></p>
-				<% if post.image.present? %>
-					<%= image_tag post.image.url,style:"width:100%;height:auto"%>
-				<% end %>
-				<div class="post-actions">
-					<i class="fa fa-heart like-<%= post.id %> post-like" data-id="<%= post.id %>" onclick= "myFunction(this)"></i>
-					<i class="fa fa-comment post-comment"></i>
-				</div>
-			</div>
-			<% end %>
+			<%= render "users/profile/posts" %>
 		</div>
 	</div>
 </div>

@@ -22,12 +22,8 @@ class RequestsController < ApplicationController
 		end
 	end
 	def add_friend
-		@connections = Connection.where(sender_id: current_user.id).or(Connection.where(reciever_id: current_user.id))
-		@friends = Array.new
-		@connections.each do |connection|
-			@friends << connection.find_friends(current_user.id)
-		end
-		@friends << current_user.id
+		@friends = current_user.friends
+		@friends << current_user
 		@users = User.where.not(id: @friends)
 		@requests = Request.pending.where(sender_id: current_user.id)
 	end

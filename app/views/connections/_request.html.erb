@@ -1,0 +1,22 @@
+<% @requests.each do |request| %>
+  <div class="form-group" style="padding-top: 12px">
+    <div class="form-row">
+      <div class="col-2">
+        <%= link_to (profile_path(request.sender.id) )do %>
+          <%= image_tag request.sender.image.url,class: "img-profilepicture-post hover-box"%>
+        <% end %>                            
+      </div>
+      <div class="col-6">
+        <%= link_to (profile_path(request.sender.id) )do %>
+        <p style="text-align: left;color: #000;margin-top: 2px;margin-left:20px;font-size: 22px"><strong><%= request.sender.full_name %></strong></p>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <input  type="button" value="Deny" id="deny_button" onclick= "denyRequest(<%= request.id %>)" class="btn btn-danger"/>
+      </div>
+      <div class="col-2">
+        <%= link_to "Accept",connections_path(sender_id: request.sender.id, request_id: request.id),class:"btn btn-success",method: :post, remote: true %> 
+      </div>
+    </div>
+  </div>
+<% end %>

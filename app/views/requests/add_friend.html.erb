@@ -20,11 +20,9 @@
             <div class="form-group" style="padding-top: 12px">
               <div class="form-row">
                 <div class="col-2">
-                  <% if user.image.present? %>
-                    <%= link_to (profile_path(user.id) )do %>
-                    <%= image_tag user.image.url,class: "img-profilepicture-post hover-box"%>
-                    <% end %>       
-                  <% end %>                        
+                  <%= link_to (profile_path(user.id) )do %>
+                   <%= image_tag user.image.url,class: "img-profilepicture-post hover-box"%>
+                  <% end %>                          
                 </div>
                 <div class="col-6">
                   <%= link_to (profile_path(user.id) )do %>

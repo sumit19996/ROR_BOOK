@@ -4,11 +4,9 @@
 		<div class="col-3 home-left-box">
 			<div class="container">
 				<div class="form-horizontal ">
-					<% if current_user.image.present? %>
 					<%= link_to (profile_path(current_user.id) )do %>
-					<%= image_tag current_user.image.url,class: "img-profilepicture-home hover-box"%>
+						<%= image_tag current_user.image.url,class: "img-profilepicture-home hover-box"%>
 					<% end %>					
-					<% end %>
 					<div style="margin-top:-5px">
 						<%= link_to (profile_path(current_user.id) )do %>
 						<p style="text-align: left;color: #000"><%= current_user.full_name %></p>
@@ -37,9 +35,7 @@
 								</div>
 								<div class="form-row">
 									<div class="col-3">			
-										<% if current_user.image.present? %>
 										<%= image_tag current_user.image.url,class: "img-profilepicture-new-post"%>
-										<% end %>
 									</div>
 									<div class="col-9">			
 										<%= f.text_area :caption,class:"caption",placeholder:"What's on your mind?" %>

@@ -1,0 +1,22 @@
+<div class=form-group>
+	<div class="form-group" style="position:relative">
+		<div class="container" style="height:<%= @user.cover_image.present? ? "auto" : "400px" %>">
+			<%= @user.cover_image.present? ? (image_tag @user.cover_image.url,class:"img-coverpicture-profile") : ""%>
+		</div>
+		<div class="form-group">
+			<%= link_to (edit_user_registration_path(current_user.id)), class: "btn btn-secondary icon-camera-btn form-control",style:"width: 190px" do%>
+			<i class="fa fa-camera"style="font-size: 19px" aria-hidden="true"></i>
+			<%= @user.cover_image.present? ? "Edit Cover Photo" : "Add Cover Photo"%>
+			
+			<% end %>
+		</div>
+	</div>	
+	<div class="form-group" style="margin-bottom:25px">
+		<%= image_tag @user.image.url,class: "img-profilepicture-profile"%>
+		<div class="form-group">
+			<%= link_to (edit_user_registration_path(current_user.id)), class: "icon-camera" do%>
+			<i class="fa fa-camera fa-2x"style="font-size: 25px" aria-hidden="true"></i>
+			<% end %>
+		</div>
+	</div>
+</div>
