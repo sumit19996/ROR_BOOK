@@ -16,11 +16,11 @@ class ImageUploader < CarrierWave::Uploader::Base
  
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
-    if profile.model.gender == "Male"
-      ActionController::Base.helpers.asset_path("male.jpg")
-    else
-      ActionController::Base.helpers.asset_path("female.jpg")
-    end
+   # if profile.model.gender == "Male"
+      ActionController::Base.helpers.asset_path("default.png")
+   # else
+   #  ActionController::Base.helpers.asset_path("female.jpg")
+   # end
   #   "assets/images/"+ ["default.png"].compact.join('_')
   end
 
