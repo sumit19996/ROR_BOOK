@@ -19,6 +19,8 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   mount_uploader :cover_image, ImageUploader
   
+  acts_as_paranoid
+  
   def full_name
   	"#{first_name} #{last_name}"
   end

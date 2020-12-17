@@ -22,6 +22,16 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
 
+#acts_as_paranoid for soft delete
+gem 'acts_as_paranoid'
+
+#active_admin gem
+gem 'activeadmin'
+
+#active_admin_theme gem
+gem 'active_admin_flat_skin'
+gem 'arctic_admin'
+
 gem 'rake'
 #devise gem for authentication
 gem 'devise'

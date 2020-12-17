@@ -7,6 +7,10 @@ class Post < ApplicationRecord
 	has_many :comments
 	validate :any_present?
 	
+	def user
+		User.with_deleted.find(user_id)
+	end
+	
 	def any_present?
 		if caption.blank? && image.blank?
 		  errors[:base] << "Error message"
